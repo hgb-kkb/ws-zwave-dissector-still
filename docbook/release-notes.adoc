@@ -1,0 +1,154 @@
+include::attributes.adoc[]
+:stylesheet: ws.css
+:linkcss:
+
+= Wireshark {wireshark-version} Release Notes
+// Asciidoctor Syntax Quick Reference:
+// https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+
+This is an experimental release intended to test new features for Wireshark 3.6.
+
+== What is Wireshark?
+
+Wireshark is the world’s most popular network protocol analyzer.
+It is used for troubleshooting, analysis, development and education.
+
+== What’s New
+
+Many improvements have been made.
+See the “New and Updated Features” section below for more details.
+
+// === Bug Fixes
+
+// The following bugs have been fixed:
+
+//* wsbuglink:5000[]
+//* wsbuglink:6000[Wireshark bug]
+//* cveidlink:2014-2486[]
+//* Wireshark keeps banging out random chords on your piano and yelling “LIPS LIKE SUGUAR, SUGAR KISSES” because it was funny that one time at a party.
+
+=== New and Updated Features
+
+The following features are new (or have been significantly updated) since version 3.4.0:
+
+* The Windows installers now ship with Npcap 1.31.
+They previously shipped with Npcap 1.20.
+
+* TCP conversations now support a completeness criteria, which facilitates the identification of TCP streams having any
+  of opening or closing handshakes, a payload, in any combination. It is accessed with the new tcp.completeness filter.
+
+* Protobuf fields that are not serialized on the wire (missing in capture files) can now be displayed with default values
+  by setting the new 'add_default_value' preference. The default values might be explicitly declared in 'proto2' files,
+  or false for bools, first value for enums, zero for numeric types.
+
+* Wireshark now supports reading Event Tracing for Windows (ETW). A new extcap named ETW reader is created that now can open an etl file, convert all
+  events in the file to DLT_ETW packets and write to a specified FIFO destination. Also, a new packet_etw dissector is
+  created to dissect DLT_ETW packets so Wireshark can display the DLT_ETW packet header, its message and packet_etw dissector
+  calls packet_mbim sub_dissector if its provider matches the MBIM provider GUID.
+
+* "Follow DCCP stream" feature to filter for and extract the contents of DCCP streams.
+
+* Wireshark now supports dissecting the rtp packet with OPUS payload.
+
+* Importing captures from text files is now also possible based on regular expressions. By specifying a regex capturing a single
+  packet including capturing groups for relevant fields a textfile can be converted to a libcap capture file. Supported data
+  encodings are plain-hexadecimal, -octal, -binary and base64.
+  Also the timestamp format now allows the second-fractions to be placed anywhere in the timestamp and it will be stored with
+  nanosecond instead of microsecond precision.
+
+* Significant RTP Player redesign and improvements (see Wireshark User Documentation, https://www.wireshark.org/docs/wsug_html_chunked/ChTelPlayingCalls.html[Playing VoIP Calls] and https://www.wireshark.org/docs/wsug_html_chunked/_rtp.html#ChTelRtpPlayer[RTP Player Window])
+** RTP Player can play many streams in row
+** UI is more responsive
+** RTP Player maintains playlist, other tools can add/remove streams to it
+** Every stream can be muted or routed to L/R channel for replay
+** Save audio is moved from RTP Analysis to RTP Player. RTP Player saves what was played. RTP Player can save in multichannel .au or .wav.
+** RTP Player added to menu Telephony>RTP>RTP Player
+
+* VoIP dialogs (VoIP Calls, RTP Streams, RTP Analysis, RTP Player, SIP Flows) are non-modal, can stay opened on background
+** Same tools are provided acros all dialogs (Prepare Filter, Analyse, RTP Player ...)
+
+* Follow stream is now able to follow SIP call by SIP.Call-ID
+
+// === Removed Features and Support
+
+// === Removed Dissectors
+
+// === New File Format Decoding Support
+
+// [commaize]
+// --
+// --
+
+=== New Protocol Support
+
+// Add one protocol per line between the -- delimiters in the format
+// "Full protocol name (Abbreviation)"
+[commaize]
+--
+Kerberos SPAKE
+O-RAN fronthaul UC-plane (O-RAN)
+PDU Transport Protocol
+SparkplugB
+State Synchronization Protocol (SSyncP)
+UAVCAN\CAN
+R09.x (R09)
+--
+
+=== Updated Protocol Support
+
+Too many protocols have been updated to list here.
+
+=== New and Updated Capture File Support
+
+// There is no new or updated capture file support in this release.
+// Add one file type per line between the -- delimiters.
+[commaize]
+--
+--
+
+// === New and Updated Capture Interfaces support
+
+//_Non-empty section placeholder._
+
+// === Major API Changes
+
+== Getting Wireshark
+
+Wireshark source code and installation packages are available from
+https://www.wireshark.org/download.html.
+
+=== Vendor-supplied Packages
+
+Most Linux and Unix vendors supply their own Wireshark packages.
+You can usually install or upgrade Wireshark using the package management system specific to that platform.
+A list of third-party packages can be found on the
+https://www.wireshark.org/download.html#thirdparty[download page]
+on the Wireshark web site.
+
+== File Locations
+
+Wireshark and TShark look in several different locations for preference files, plugins, SNMP MIBS, and RADIUS dictionaries.
+These locations vary from platform to platform.
+You can use About → Folders to find the default locations on your system.
+
+== Getting Help
+
+The User’s Guide, manual pages and various other documentation can be found at
+https://www.wireshark.org/docs/
+
+Community support is available on
+https://ask.wireshark.org/[Wireshark’s Q&A site]
+and on the wireshark-users mailing list.
+Subscription information and archives for all of Wireshark’s mailing lists can be found on
+https://www.wireshark.org/lists/[the web site].
+
+Bugs and feature requests can be reported on
+https://gitlab.com/wireshark/wireshark/-/issues[the issue tracker].
+
+// Official Wireshark training and certification are available from
+// https://www.wiresharktraining.com/[Wireshark University].
+
+== Frequently Asked Questions
+
+A complete FAQ is available on the
+https://www.wireshark.org/faq.html[Wireshark web site].
